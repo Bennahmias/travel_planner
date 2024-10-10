@@ -1,1 +1,1 @@
-print
+print("niv is sexy!")
