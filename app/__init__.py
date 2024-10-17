@@ -24,8 +24,9 @@ def create_app():
     db.init_app(app)
 
     # Register routes
-    from .routes import main
+    from app.routes import main, register_all_blueprints
     # This adds all the routes defined in the main Blueprint to the app.
     app.register_blueprint(main)
+    register_all_blueprints(app)
 
     return app
