@@ -4,7 +4,7 @@ Instead of having all your routes in one file, you can separate them into differ
 This helps keep your app modular, making it easier to manage as it grows."""
 
 from app import db
-from app.models.models import Itinerary
+from app.models import Itinerary
 
 
 main = Blueprint('main',__name__)
