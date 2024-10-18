@@ -2,7 +2,11 @@ from flask import Blueprint, jsonify, request
 from app import db
 from app.models import Itinerary
 
+
+
 Itineraries = Blueprint('itineraries',__name__)
+
+
 
 # add new itineraries to the database
 @Itineraries.route('/itineraries', methods=['POST'])
@@ -13,8 +17,12 @@ def add_itinerary():
     if not data or 'destination' not in data or 'days' not in data:
         return jsonify({"error": "Invalid data, no destination or days"}), 400
     
-    # This creates a new Itinerary object using the data provided by the client.
-    new_itinerary = Itinerary(destination=data['destination'], days=data['days'])
+    # Create a new Itinerary object using the data provided by the client
+    new_itinerary = Itinerary(
+        destination=data['destination'], 
+        days=data['days'], 
+        user_id=data['user_id']  # Include user_id here
+    )
     # This adds the new itinerary to the current database session, but it’s not yet saved.
     db.session.add(new_itinerary)
     # This commits (saves) the transaction to the database, making the changes permanent.
@@ -34,7 +42,7 @@ def get_itineraries():
         # creates dict with id, dest and days
         itinerary_data = {
             'id': itinerary.id,
-            'destination': itinerary.destination,
+            'destination': itinerary.destination,       
             'days': itinerary.days
         }
         output.append(itinerary_data)

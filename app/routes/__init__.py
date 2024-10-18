@@ -5,6 +5,7 @@ This helps keep your app modular, making it easier to manage as it grows."""
 from app import db
 from .itinerary import Itineraries
 from .user import user
+from .place import places
 
 
 main = Blueprint('main',__name__)
@@ -18,3 +19,4 @@ def index():
 def register_all_blueprints(app):
     app.register_blueprint(Itineraries)
     app.register_blueprint(user)
+    app.register_blueprint(places)
