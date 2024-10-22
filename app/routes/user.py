@@ -29,3 +29,4 @@ def get_users_list():
         }
         output.append(users_data)
     return jsonify({"users list": output})
+

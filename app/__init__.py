@@ -4,6 +4,7 @@ Python objects (classes) instead of writing SQL queries directly.
 The Flask-SQLAlchemy extension integrates SQLAlchemy with Flask, 
 simplifying the interaction between your Flask app and the database."""
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager
 
 # Create an instance of SQLAlchemy-will handle all interactions with the database
 db = SQLAlchemy()
@@ -19,9 +20,15 @@ def create_app():
     # (in this case, Config inside config.py).
     app.config.from_object('config.Config')
 
+     # Add a secret key for JWT tokens (this should be kept secure in production)
+    app.config['JWT_SECRET_KEY'] = 'Bekeromo151'  
+
     # Initialize the database with the app-This ties the SQLAlchemy instance to the Flask app,
     # so it knows how to interact with your Flask app and the database
     db.init_app(app)
+
+    # Initialize JWT with the app
+    jwt = JWTManager(app)
 
     # Register routes
     from app.routes import main, register_all_blueprints
